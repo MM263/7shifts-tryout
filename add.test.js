@@ -1,4 +1,4 @@
-const add = require("./add");
+const { add, getDelimiter } = require("./add");
 
 test("throws error if you provide a non-string variable", () => {
   const executeAdd = arg => () => {
@@ -48,5 +48,18 @@ test("supports multiple delimiters", () => {
 });
 
 test("supports multiple custom delimiters of arbitrary length", () => {
-  expect(add("//$$$^^^^%%\n1$$$3^^^^3%%7")).toBe(14);
+  expect(add("//$$$%%^^^^\n1$$$3^^^^3%%7")).toBe(14);
+});
+
+test("getDelimiter returns ',' if there is no control code", () => {
+  expect(getDelimiter("1,2,3")).toBe(",");
+});
+
+test("getDelimiter returns valid RegExp", () => {
+  const testString = "//$$$**\n1$$$2**3";
+
+  expect(getDelimiter(testString).test("$$$")).toBe(true);
+  expect(getDelimiter(testString).test("**")).toBe(true);
+  expect(getDelimiter(testString).test("^^^^^")).toBe(false);
+  expect(getDelimiter(testString).test("123")).toBe(false);
 });
