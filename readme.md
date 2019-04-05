@@ -6,7 +6,7 @@
 
 ---
 
-There is a thing, that I think I could do better in terms of pure optimization - we right now we are mapping an array and then we are reducing it. There is no need to loop through an array twice, the best option would be to reduce it right away and run `parseInt` on each number right there, but we would sacrifice our ability to display all numbers that disobey rule 4.
+There is a thing, that I think I could do better in terms of pure optimization - right now we are mapping an array and then we are reducing it. There is no need to loop through an array twice, the best option would be to reduce it right away and run `parseInt` on each number right there, but we would sacrifice our ability to display all numbers that disobey rule 4.
 
 To solve it I would offer displaying only the first offending number in the error that we throw and if we do that our function would look like this:
 
