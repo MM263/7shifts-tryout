@@ -42,3 +42,11 @@ test("ignores numbers more than 1000", () => {
 test("supports arbitrary length custom delimiters", () => {
   expect(add("//$$$$$$$$$\n1$$$$$$$$$3$$$$$$$$$3$$$$$$$$$7")).toBe(14);
 });
+
+test("supports multiple delimiters", () => {
+  expect(add("//$#%&^\n1$3#3^7")).toBe(14);
+});
+
+test("supports multiple custom delimiters of arbitrary length", () => {
+  expect(add("//$$$^^^^%%\n1$$$3^^^^3%%7")).toBe(14);
+});

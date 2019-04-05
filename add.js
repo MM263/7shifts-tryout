@@ -10,7 +10,16 @@ const add = numbers => {
   let delimiter = ",";
 
   if (numbers.substring(0, 2) === "//") {
-    delimiter = numbers.match(/(?<=\/\/)(.*)(?=\n)/g)[0];
+    const delimiters = numbers.match(/(?<=\/\/)(.*)(?=\n)/g)[0];
+    const regexDelimiter = new RegExp(
+      delimiters
+        .match(/(.)\1*/g)
+        .map(delimiter => delimiter.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"))
+        .join("|"),
+      "g"
+    );
+
+    delimiter = regexDelimiter;
   }
 
   const result = numbers
